@@ -1,0 +1,60 @@
+﻿@model Calculator.Models.calc
+
+@{
+    ViewBag.Title = "Advanced Calculator";
+}
+
+<div class="container mt-5">
+    <!-- Calculator Form -->
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">Advanced Calculator</h2>
+            @using (Html.BeginForm("Index", "Calc", FormMethod.Post, new { @id = "calcForm", @class = "form-horizontal" }))
+            {
+                <!-- Input Fields -->
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.num1, new { @class = "form-control", placeholder = "Enter first number" })
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.num2, new { @class = "form-control", placeholder = "Enter second number (if needed)" })
+                </div>
+
+                <!-- Operation Selection -->
+                <div class="form-group">
+                    <select name="operation" class="form-control">
+                        <option value="add">Add</option>
+                        <option value="sub">Subtract</option>
+                        <option value="mul">Multiply</option>
+                        <option value="div">Divide</option>
+                        <option value="exp">Exponent</option>
+                        <option value="sin">Sine</option>
+                        <!-- Add more operations here -->
+                    </select>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary btn-block">Calculate</button>
+                <button type="button" class="btn btn-danger" onclick="clearFields()">Clear</button>
+
+            }
+
+            <!-- Result Display -->
+            @if (Model != null)
+            {
+                <div class="alert alert-success text-center mt-4">
+                    <h4>Result: @Model.Result</h4>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    function clearFields() {
+        document.getElementById("calcForm").reset();
+    }
+</script>
+}
+
